@@ -11,8 +11,7 @@
 #include <FL/Fl_Box.H>
 #include <time.h>
 
-
-std::vector<std::vector<int>> choices{{0,1},{0,2},{0,3},{0}};
+std::vector< std::vector<int> > choices{{0,1},{0,2},{0,3},{0}};
 int NUM_ROUNDS = 32;
 
 void game_over(double total_choices);
