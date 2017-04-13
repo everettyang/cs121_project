@@ -23,6 +23,7 @@ void white_callback(Fl_Widget*w , void* choice);
 
 void game_over();
 void show_result();
+void show_countdown();
 void update_score(double points, double percent_correct);
 int ai_predict(double total_choices);
 
@@ -34,11 +35,11 @@ Fl_Box box(50,50,200,200,"Choose an option");
 Fl_Box score(400,400,100,100,"Points: 0");
 Fl_Box comp_right(300,100,100,100,"Percent computer correct:\n\t0%");
 
-void time(Fl_Widget*w, void* timer_on);
+void time(Fl_Widget* w, void*);
 void button_time(void *);
 void timer(void *);
 
-Fl_Button time_right(450,350,75,75,"Start");
+Fl_Button time_right(450,350,75,75,"START");
 Fl_Box time_left(300,200,300,100,"Time left");
 
 

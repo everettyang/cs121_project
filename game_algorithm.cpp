@@ -49,9 +49,7 @@ void time(Fl_Widget*, void*) {
 
 void button_time(void*)
 {
-	red.deactivate();
-	white.deactivate();
-	blue.deactivate();
+	red.deactivate(); white.deactivate(); blue.deactivate();
 
 	if (NUM_ROUNDS != 0) time_right.activate();
 
@@ -59,36 +57,26 @@ void button_time(void*)
 }	
 
 void timer(void*) {
-	  static int i = 5;
-	  if (time_right.value() == 1) { i = 5; time_right.value(0); }
+	  static int time = 5;
+	  if (time_right.value() == 1) { time = 5; time_right.value(0); }
 
-	  blue.activate();
-	  red.activate();
-	  white.activate();
+	  blue.activate(); red.activate(); white.activate();
 
-	  std::stringstream tt;
-	  tt << "Time left: " << i << " seconds";
-	  std::string temp = tt.str();
-	  const char* cstr = temp.c_str();
-	  time_left.copy_label(cstr);
-
-	  printf("Timer! #%d\n", i--);
+	  show_countdown(time);	  
+	  time -= 1;
 	  
-	  if(i < 0) {
+	  if(time < 0) {
 		//if times up
 		Fl::remove_timeout(timer);
 
-		//std::cout << "turn timer off" << std::endl;
 		time_left.label("Time's up! No points! Next move?");
 
-		red.deactivate();
-		white.deactivate();
-		blue.deactivate();
+		red.deactivate(); white.deactivate(); blue.deactivate();
 
 		time_right.activate();
 		NUM_ROUNDS = NUM_ROUNDS - 1;
 		
-		i = 5;
+		time = 5;
 	  }
 	  else {	
 		Fl::repeat_timeout(1.0 , timer);
@@ -96,6 +84,15 @@ void timer(void*) {
 }
 
 //---------------------------------------- game logic-----------------------
+
+void show_countdown(int time)
+{
+	std::stringstream tt;
+	tt << "Time left: " << time << " seconds";
+	std::string temp = tt.str();
+	const char* cstr = temp.c_str();
+	time_left.copy_label(cstr);
+}
 
 void update_score(double points, double percent_correct)
 {
