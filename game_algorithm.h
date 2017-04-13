@@ -23,7 +23,7 @@ void white_callback(Fl_Widget*w , void* choice);
 
 void game_over();
 void show_result();
-void show_countdown();
+void show_countdown(int time);
 void update_score(double points, double percent_correct);
 int ai_predict(double total_choices);
 
