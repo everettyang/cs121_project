@@ -1,4 +1,4 @@
-#include "game_algorithm.h"
+include "game_algorithm.h"
 
 //---------------------------------------- callbacks-----------------------
 
@@ -32,7 +32,60 @@ void white_callback(Fl_Widget*, void*) {
 	}
 }
 
+void time(Fl_Widget*, void*) {
+	std::cout<<int{time_right.value()}<<std::endl;
+	if(time_right.value()==0)
+	{
+		time_right.deactivate();
+		Fl::add_timeout(5.0, timer);	
+	}
+	
+}
 //---------------------------------------- game logic-----------------------
+
+static void timer(void *data) {
+      static int i = 5;
+	  blue.activate();
+	  red.activate();
+	  white.activate();
+	  blue.callback(blue_callback);
+	  red.callback(red_callback);
+	  white.callback(white_callback);
+	  printf("Timer! #%d\n", --i);
+	  std::stringstream tt;
+	  tt << "Time left: " << i+1 << " seconds";
+	  std::string temp = tt.str();
+	  const char* cstr = temp.c_str();
+	  time_left.copy_label(cstr);
+	  
+	  if(red.value()==1||blue.value()==1||white.value()==1){
+	    red.deactivate();
+	    white.deactivate();
+	    blue.deactivate();
+		time_right.activate();
+	    red.value(0);
+	    blue.value(0);
+	    white.value(0);
+	    Fl::remove_timeout(timer, data);
+	    std::cout << "random" << std::endl;
+	    i=5;	  
+	  }
+	  else if(i < 0){
+		Fl::remove_timeout(timer, data);
+		std::cout << "turn timer off" << std::endl;
+		time_left.label("Time's up! No points! Next move?");
+		red.deactivate();
+		white.deactivate();
+		blue.deactivate();
+		time_right.activate();
+		NUM_ROUNDS = NUM_ROUNDS-1;
+		i = 5;
+	  }
+	  else{		
+		Fl::repeat_timeout(1.0,timer, data);
+      } 
+}
+
 
 void update_score(double points, double percent_correct)
 {
@@ -120,14 +173,17 @@ int ai_predict(double total_choices)
 }
 
 
-//--------------------------------Test Main---------------------------------------------
+//--------------------------------TestMain-------------------------------------------
 
 int main()
 {
-	
-	blue.callback(blue_callback);
-	red.callback(red_callback);
-	white.callback(white_callback);
+	//blue.callback(blue_callback);
+	//red.callback(red_callback);
+    //white.callback(white_callback);
+	red.deactivate();
+	white.deactivate();
+	blue.deactivate();
+	time_right.callback(time);
 	box.box(FL_UP_BOX);
 	win.show();
 	return Fl::run();
