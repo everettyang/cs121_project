@@ -36,10 +36,13 @@ void white_callback(Fl_Widget*, void*) {
 }
 
 void time(Fl_Widget*, void*) {
-
+	
+	
 	if (time_right.label() != label) {time_right.label(label);}
 
-	//std::cout<<int{time_right.value()}<<std::endl;
+	//std::cout<<int{time_right.value()}<<std::endl
+	num_rounds();
+	
 	time_right.deactivate();
 	//value is set to one to distinguish what invoked timer callback
 	time_right.value(1);
@@ -113,9 +116,20 @@ void update_score(double points, double percent_correct)
 	ss.clear();
 }
 
+void num_rounds()
+{
+	std::stringstream ss;
+	ss << "Number of rounds left " << remaining_rounds;
+	std::string temp = ss.str();
+	const char* cstr = temp.c_str();
+	rounds.copy_label(cstr);
+	remaining_rounds -=1;
+}
+
 void show_result()
 {
 	NUM_ROUNDS -= 1;
+	
 	static double points;
 	static double comp_correct;
 	static double comp_correct_per;
