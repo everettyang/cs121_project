@@ -100,7 +100,16 @@ void l5_callback(Fl_Widget* , void *) {
 		win1.show();
 		start.callback(start_callback);
 		starte.callback(starte_callback);
-		ed.label("How to play game");
+		ed.label("First of all, the game will ask user the diffcult of the game. \n Then user will make certain of choice to compare the ramdom choice. \nFinally user will get score.");
+		
+		
+		dl1.label("Top five\n ");
+		dl2.label("Top five\n ");
+		dl3.label("Top five\n ");
+		dl4.label("Top five\n ");
+		dl5.label("Top five\n ");
+		
+		
 		
 		l1.callback(l1_callback);
 		l2.callback(l2_callback);
