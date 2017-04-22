@@ -1,6 +1,14 @@
 #include "splash_screen.h" 
 int main()
 {
+	animation.image(image);
+	animation1.image(image1);
+
+	animation1.hide();
+	animation.set_changed();
+	background.image(bg);
+	Fl::add_timeout(.05, animate);
+
 	start.callback(start_callback);
 	starte.callback(starte_callback);
 	ed.label("First, the game will ask the user to select the difficulty. \n The computer will try to guess the user's choice. \nIf the computer guesses wrong then the user gets 10 points.\n The number of rounds vary based on difficulty.\n In the end, the user will be shown how his/her score ranks among the top 5 scores.");
@@ -30,8 +38,6 @@ int main()
 
 	win1.show();
 
-	std::cout << "Game alg" << std::endl;
-
-		return Fl::run();
+	return Fl::run();
 
 }

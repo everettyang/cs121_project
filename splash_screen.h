@@ -9,6 +9,8 @@
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Box.H>
+#include <FL/Fl_GIF_Image.H>
+#include <FL/Fl_JPEG_Image.H>
 #include <time.h>
 #include "game_algorithm.h" 
 //---------------win1----------------------------
@@ -17,9 +19,17 @@ extern Fl_Window win1;
 void start_callback(Fl_Widget* w , void* start_but);
 extern Fl_Button start;
 //box
+extern int width,height;
 extern Fl_Box name;
 extern Fl_Box teamm;
 extern Fl_Box teamn;
+
+extern Fl_Box animation;
+extern Fl_Box animation1;
+extern Fl_Box background;
+extern Fl_JPEG_Image bg;
+extern Fl_GIF_Image image;
+extern Fl_GIF_Image image1;
 //---------------winexplain----------------------------
 extern Fl_Window wine;
 //button
@@ -72,5 +82,7 @@ extern Fl_Window win24;
 //--------------win25-----------------------
 extern Fl_Window win25;
 //extern Fl_Box d5(100,20,100,300,"The top five score is \n ");
+void animate(void*);
+void animate_helper(int x, int y);
 
 #endif //SPLASH_SCREEN
