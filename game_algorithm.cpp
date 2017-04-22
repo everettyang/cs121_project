@@ -1,4 +1,21 @@
-#include "game_algorithm.h"
+#include "splash_screen.h"
+
+//---------------------------------------- Definitions-----------------------
+std::vector< std::vector<int> > choices{{0,1},{0,2},{0,3},{0}};
+const char* label = "Next round";
+
+Fl_Window win(700,500, "Guessing Game");
+Fl_Box rounds(300,300,300,50);
+
+Fl_Button time_right(450,350,75,75,"START");
+Fl_Box time_left(300,200,300,100,"Time left");
+
+Fl_Button red(250,350,75,75, "Red");
+Fl_Button white(350,350,75,75, "White");
+Fl_Button blue(150,350,75,75,"Blue");
+Fl_Box box(50,50,200,200,"Choose an option");
+Fl_Box score(400,400,100,100,"Points: 0");
+Fl_Box comp_right(300,100,100,100,"Percent computer correct:\n\t0%");
 
 //---------------------------------------- callbacks-----------------------
 
@@ -41,7 +58,6 @@ void time(Fl_Widget*, void*) {
 	if (time_right.label() != label) {time_right.label(label);}
 
 	//std::cout<<int{time_right.value()}<<std::endl
-	num_rounds();
 	
 	time_right.deactivate();
 	//value is set to one to distinguish what invoked timer callback
@@ -78,6 +94,7 @@ void timer(void*) {
 
 		time_right.activate();
 		NUM_ROUNDS = NUM_ROUNDS - 1;
+
 		
 		time = 5;
 	  }
@@ -119,17 +136,16 @@ void update_score(double points, double percent_correct)
 void num_rounds()
 {
 	std::stringstream ss;
-	ss << "Number of rounds left " << remaining_rounds;
+	ss << "Number of rounds left: " << NUM_ROUNDS;
 	std::string temp = ss.str();
 	const char* cstr = temp.c_str();
 	rounds.copy_label(cstr);
-	remaining_rounds -=1;
 }
 
 void show_result()
 {
 	NUM_ROUNDS -= 1;
-	
+	num_rounds();
 	static double points;
 	static double comp_correct;
 	static double comp_correct_per;
@@ -198,19 +214,21 @@ int ai_predict(double total_choices)
 
 
 //--------------------------------TestMain-------------------------------------------
-
-int main()
-{
-	blue.callback(blue_callback);
-	red.callback(red_callback);
-        white.callback(white_callback);
-
-	red.deactivate();
-	white.deactivate();
-	blue.deactivate();
-
-	time_right.callback(time);
-	box.box(FL_UP_BOX);
-	win.show();
-	return Fl::run();
-}
+//
+//int main()
+//{
+//	blue.callback(blue_callback);
+//	red.callback(red_callback);
+//        white.callback(white_callback);
+//
+//	num_rounds();
+//
+//	red.deactivate();
+//	white.deactivate();
+//	blue.deactivate();
+//
+//	time_right.callback(time);
+//	box.box(FL_UP_BOX);
+//	win.show();
+//	return Fl::run();
+//}
