@@ -24,32 +24,30 @@ Fl_Box teamn(450,200,100,200,"Team members:\n Scott Tran, Cesar Villanueva-Vazqu
 //---------------winexplain----------------------------
 Fl_Window wine(width,height, "Instructions");
 //button
-Fl_Button starte(450,350,75,75,"START");
+Fl_Button starte(450,350,75,75,"Next");
 //box explain
 Fl_Box explain(250,10,100,200,"How to play:");
-Fl_Box ed(350,60,300,200,"First of all, the game will ask user the Difficulty of the game. Then user will make certain of choice to compare the ramdom choice which computer make and get score.");
+Fl_Box ed(350,60,300,200,"First, the game will ask the user to select the difficulty. \n The computer will try to guess the user's choice. \nIf the computer guesses wrong then the user gets 10 points.\n The number of rounds vary based on difficulty.\n In the end, the user will be shown how his/her score ranks among the top 5 scores.");
 
 //--------------win2-----------------------
-Fl_Window win2(width,height, "Second");
+Fl_Window win2(width,height, "Select Difficulty");
 //box
-Fl_Box difficulty(100,10,100,200,"Which level would you like to play?");
+Fl_Box difficulty(450,10,100,200,"Which level would you like to play?");
 //button1
-Fl_Button l1(20,150,75,75,"Level 1");
-Fl_Box dl1(20,230,75,200,"The top five scores are\n");
-
-
+Fl_Button l1(300,250,75,75,"Level 1");
+Fl_Box dl1(300,300,75,200,"Top 5 Scores:");
 //button2
-Fl_Button l2(100,150,75,75,"Level 2");
-Fl_Box dl2(100,230,75,200,"The top five scores are\n");
+Fl_Button l2(380,250,75,75,"Level 2");
+Fl_Box dl2(380,300,75,200,"Top 5 Scores:");
 //button3
-Fl_Button l3(180,150,75,75,"Level 3");
-Fl_Box dl3(180,230,75,200,"The top five scores are\n");
+Fl_Button l3(460,250,75,75,"Level 3");
+Fl_Box dl3(460,300,75,200,"Top 5 Scores:");
 //button4
-Fl_Button l4(260,150,75,75,"Level 4");
-Fl_Box dl4(260,230,75,200,"The top five scores are\n");
+Fl_Button l4(540,250,75,75,"Level 4");
+Fl_Box dl4(540,300,75,200,"Top 5 Scores:");
 //button5
-Fl_Button l5(340,150,75,75,"Level 5");
-Fl_Box dl5(340,230,75,200,"The top five scores are\n");
+Fl_Button l5(620,250,75,75,"Level 5");
+Fl_Box dl5(620,300,75,200,"Top 5 Scores:");
 
 void animate_helper(int x, int y)
 {
