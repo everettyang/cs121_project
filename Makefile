@@ -6,7 +6,7 @@ COMPILEMSG = 'Compiling $^...'
 
 all: game
 
-splash: splash_screen.cpp
+splash_screen: splash_screen.cpp
 	@echo $(COMPILEMSG) 
 	@$(CC) splash_screen.cpp $(LINKFLAGS) -o game 
 

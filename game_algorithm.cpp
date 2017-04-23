@@ -4,7 +4,7 @@
 std::vector< std::vector<int> > choices{{0,1},{0,2},{0,3},{0}};
 const char* label = "Next round";
 
-Fl_Window win(700,500, "Guessing Game");
+Fl_Window win(width,height, "Guessing Game");
 Fl_Box rounds(300,300,300,50);
 
 Fl_Button time_right(450,350,75,75,"START");
@@ -94,6 +94,7 @@ void timer(void*) {
 
 		time_right.activate();
 		NUM_ROUNDS = NUM_ROUNDS - 1;
+		num_rounds();
 
 		
 		time = 5;

@@ -22,7 +22,7 @@ Fl_Box name(450,50,100,200,"OUTSMART THE COMPUTER!");
 Fl_Box teamm(450,180,80,80,"Team number: 26");
 Fl_Box teamn(450,200,100,200,"Team members:\n Scott Tran, Cesar Villanueva-Vazquez, Haozhen Yang, Everett Yang.");
 //---------------winexplain----------------------------
-Fl_Window wine(1000,1000, "window explain");
+Fl_Window wine(width,height, "Instructions");
 //button
 Fl_Button starte(450,350,75,75,"START");
 //box explain
@@ -30,7 +30,7 @@ Fl_Box explain(250,10,100,200,"How to play:");
 Fl_Box ed(350,60,300,200,"First of all, the game will ask user the Difficulty of the game. Then user will make certain of choice to compare the ramdom choice which computer make and get score.");
 
 //--------------win2-----------------------
-Fl_Window win2(1000,1000, "second");
+Fl_Window win2(width,height, "Second");
 //box
 Fl_Box difficulty(100,10,100,200,"Which level would you like to play?");
 //button1
