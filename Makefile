@@ -10,9 +10,9 @@ splash_screen: splash_screen.cpp
 	@echo $(COMPILEMSG) 
 	@$(CC) splash_screen.cpp $(LINKFLAGS) -o game 
 
-game: game_algorithm splash main
+game: game_algorithm splash main initials
 	@echo $(LINKMSG) 
-	@$(CC) game_algorithm.o splash_screen.o main.o $(LINKFLAGS) -o game 
+	@$(CC) game_algorithm.o splash_screen.o main.o part3_window.o $(LINKFLAGS) -o game 
 
 game_algorithm: game_algorithm.cpp
 	@echo $(COMPILEMSG)
@@ -20,6 +20,11 @@ game_algorithm: game_algorithm.cpp
 splash: splash_screen.cpp
 	@echo $(COMPILEMSG)
 	@$(CC) $(FLAGS) splash_screen.cpp 
+
+initials: part3_window.cpp
+	@echo $(COMPILEMSG)
+	@$(CC) $(FLAGS) part3_window.cpp 
+
 main: main.cpp
 	@echo $(COMPILEMSG)
 	@$(CC) $(FLAGS) main.cpp 

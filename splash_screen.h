@@ -5,14 +5,17 @@
 #include <iostream>
 #include <algorithm>
 #include <sstream>
+#include <fstream>
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_GIF_Image.H>
+#include <FL/Fl_Input.H>
 #include <FL/Fl_JPEG_Image.H>
 #include <time.h>
 #include "game_algorithm.h" 
+#include "part3_window.h" 
 //---------------win1----------------------------
 extern Fl_Window win1;
 //buttton
@@ -46,26 +49,18 @@ extern Fl_Box difficulty;
 //button1
 void l1_callback(Fl_Widget* w , void* start_but);
 extern Fl_Button l1;
-extern Fl_Box dl1;
-
-
 //button2
 void l2_callback(Fl_Widget* w , void* start_but);
 extern Fl_Button l2;
-extern Fl_Box dl2;
-
 //button3
 void l3_callback(Fl_Widget* w , void* start_but);
 extern Fl_Button l3;
-extern Fl_Box dl3;
 //button4
 void l4_callback(Fl_Widget* w , void* start_but);
 extern Fl_Button l4;
-extern Fl_Box dl4;
 //button5
 void l5_callback(Fl_Widget* w , void* start_but);
 extern Fl_Button l5;
-extern Fl_Box dl5;
 void animate(void *);
 //--------------win21-----------------------
 extern Fl_Window win21;

@@ -35,19 +35,14 @@ Fl_Window win2(width,height, "Select Difficulty");
 Fl_Box difficulty(450,10,100,200,"Which level would you like to play?");
 //button1
 Fl_Button l1(300,250,75,75,"Level 1");
-Fl_Box dl1(300,300,75,200,"Top 5 Scores:");
 //button2
-Fl_Button l2(380,250,75,75,"Level 2");
-Fl_Box dl2(380,300,75,200,"Top 5 Scores:");
+Fl_Button l2(400,250,75,75,"Level 2");
 //button3
-Fl_Button l3(460,250,75,75,"Level 3");
-Fl_Box dl3(460,300,75,200,"Top 5 Scores:");
+Fl_Button l3(500,250,75,75,"Level 3");
 //button4
-Fl_Button l4(540,250,75,75,"Level 4");
-Fl_Box dl4(540,300,75,200,"Top 5 Scores:");
+Fl_Button l4(600,250,75,75,"Level 4");
 //button5
-Fl_Button l5(620,250,75,75,"Level 5");
-Fl_Box dl5(620,300,75,200,"Top 5 Scores:");
+Fl_Button l5(700,250,75,75,"Level 5");
 
 void animate_helper(int x, int y)
 {
@@ -97,7 +92,7 @@ void starte_callback(Fl_Widget* , void *) {
 
 void l1_callback(Fl_Widget* , void *) {
 	win2.hide();
-	win.show();
+	scoreboard.show();
 	NUM_ROUNDS = NUM_ROUNDS * 1;
 	num_rounds();
 	
@@ -105,7 +100,7 @@ void l1_callback(Fl_Widget* , void *) {
 
 void l2_callback(Fl_Widget* , void *) {
 	win2.hide();
-	win.show();
+	scoreboard.show();
 	NUM_ROUNDS = NUM_ROUNDS * 2;
 	num_rounds();
 	
@@ -113,21 +108,21 @@ void l2_callback(Fl_Widget* , void *) {
 	
 void l3_callback(Fl_Widget* , void *) {
 	win2.hide();
-	win.show();
+	scoreboard.show();
 	NUM_ROUNDS = NUM_ROUNDS * 4;
 	num_rounds();
 	
 }
 void l4_callback(Fl_Widget* , void *) {
 	win2.hide();
-	win.show();
+	scoreboard.show();
 	NUM_ROUNDS = NUM_ROUNDS * 8;
 	num_rounds();
 	
 }
 void l5_callback(Fl_Widget* , void *) {
 	win2.hide();
-	win.show();
+	scoreboard.show();
 	NUM_ROUNDS = NUM_ROUNDS * 16;
 	num_rounds();
 }

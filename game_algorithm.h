@@ -1,17 +1,6 @@
 #ifndef GAME_ALG
 #define GAME_ALG
 
-#include <vector>
-#include <iostream>
-#include <algorithm>
-#include <sstream>
-#include <FL/Fl.H>
-#include <FL/Fl_Window.H>
-#include <FL/Fl_Button.H>
-#include <FL/Fl_Box.H>
-#include <time.h>
-
-
 extern std::vector< std::vector<int> > choices;
 extern int NUM_ROUNDS;
 extern const char* label;
