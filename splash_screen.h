@@ -44,6 +44,8 @@ extern Fl_Box ed;
 
 //--------------win2-----------------------
 extern Fl_Window win2;
+extern Fl_Box bg1;
+extern Fl_JPEG_Image im1;
 //box
 extern Fl_Box difficulty;
 //button1
