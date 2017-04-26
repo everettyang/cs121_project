@@ -33,6 +33,9 @@ int main()
 	blue.callback(blue_callback);
 	red.callback(red_callback);
         white.callback(white_callback);
+	
+	continue_game.callback(continue_button);
+	continue_game.deactivate();
 
 	time_right.callback(time);
 	box.box(FL_UP_BOX);

@@ -6,7 +6,7 @@
 int width = 1000;
 int height = 1000;
 int NUM_ROUNDS = 32;
-double points = 0;
+int points = 0;
 Fl_Window win1(width,height, "Outsmart the Computer");
 //buttton
 Fl_Box background(0,0,width,height);
@@ -94,7 +94,7 @@ void starte_callback(Fl_Widget* , void *) {
 
 void l1_callback(Fl_Widget* , void *) {
 	win2.hide();
-	scoreboard.show();
+	scoreboard->show();
 	NUM_ROUNDS = NUM_ROUNDS * 1;
 	num_rounds();
 	
@@ -102,7 +102,7 @@ void l1_callback(Fl_Widget* , void *) {
 
 void l2_callback(Fl_Widget* , void *) {
 	win2.hide();
-	scoreboard.show();
+	scoreboard->show();
 	NUM_ROUNDS = NUM_ROUNDS * 2;
 	num_rounds();
 	
@@ -110,21 +110,21 @@ void l2_callback(Fl_Widget* , void *) {
 	
 void l3_callback(Fl_Widget* , void *) {
 	win2.hide();
-	scoreboard.show();
+	scoreboard->show();
 	NUM_ROUNDS = NUM_ROUNDS * 4;
 	num_rounds();
 	
 }
 void l4_callback(Fl_Widget* , void *) {
 	win2.hide();
-	scoreboard.show();
+	scoreboard->show();
 	NUM_ROUNDS = NUM_ROUNDS * 8;
 	num_rounds();
 	
 }
 void l5_callback(Fl_Widget* , void *) {
 	win2.hide();
-	scoreboard.show();
+	scoreboard->show();
 	NUM_ROUNDS = NUM_ROUNDS * 16;
 	num_rounds();
 }

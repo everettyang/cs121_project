@@ -37,5 +37,5 @@ private:
 };
 
 
-extern Part3_window scoreboard;
+extern Part3_window* scoreboard;
 #endif // P3_WINDOW

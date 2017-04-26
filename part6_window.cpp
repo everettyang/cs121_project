@@ -1,6 +1,5 @@
 #include "splash_screen.h"
 
-Part6_window finalscore(width, height, "Final scores"); 
 
 Part6_window::Part6_window(int w, int h, const char* title = 0) :
 
@@ -13,6 +12,7 @@ Part6_window::Part6_window(int w, int h, const char* title = 0) :
 	score4_txt(x, y + 300,125,12),
 	score5_txt(x, y + 400,125,12),
 	score6_txt(x,y + 500,125,12),
+	results(6, std::vector<std::string>(2,"0")),
 	play_again(300,700, 150, 20, "Continue game"),
    	quit_game(470, 700, 150,20, "End game")
 {
@@ -26,7 +26,7 @@ void Part6_window::init_scores()
 {
 	score_read();
 	std::cout << "init_score" << std::endl;
-std::sort(results.begin(), results.end() - 1, [](const std::vector<std::string>& a,const std::vector<std::string>& b) {return std::stoi(a[1]) < std::stoi(b[1]);} );
+	std::sort(results.begin(), results.end() - 1, [](const std::vector<std::string>& a,const std::vector<std::string>& b) {return std::stoi(a[1]) < std::stoi(b[1]);} );
 	
 	score1_txt.copy_label(stats(0, results));
 	score2_txt.copy_label(stats(1, results));
@@ -42,22 +42,35 @@ std::vector<std::vector<std::string> > Part6_window::score_read()
 	std::ifstream file1("initials.txt");
 	 if (file1.is_open())
 	 {
-		while(getline(file1, line))
-		 {
-			 results[0][0] = line;
-		 }
+		for(int i = 0; i < results.size(); ++i)
+		{
+			if (getline(file1, line) || file1.eof())
+			{
+			
+		std::cout << line  << std::endl;
+			 results[i][0] = line;
+			}
+		}
 		 file1.close();
 	 }
 	
+	std::string line2;
+	std::cout << "score read mid" << std::endl;
 	std::ifstream file3("scoretxtFile.txt");
 		if(file3.is_open())
 		{
-			while(getline(file3, line))
+		
+			for(int i = 0; i < results.size(); ++i)
 			{
-				results[0][1] = line;
+				if(getline(file3, line2) || file3.eof())
+				{
+				results[i][1] = line2;
+				}
+				
 			}
 		file3.close();
 		}
+	std::cout << "score read end" << std::endl;
 
 	return results;
 
@@ -87,12 +100,12 @@ void Part6_window::playagain_callback(Fl_Widget*, void* v)
 	NUM_ROUNDS = 32;
 	points = 0;
 	time_right.activate();
-	finalscore.hide();
+	((Part6_window*)v)->hide();
 	win2.show();	
 	continue_game.deactivate();
 }
 
 void Part6_window::quitgame_callback(Fl_Widget*, void*v)
 {
-	finalscore.hide();
+	((Part6_window*)v)->hide();
 }

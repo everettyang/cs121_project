@@ -1,6 +1,5 @@
 #include "splash_screen.h"
-
-Part3_window scoreboard(width, height, "Enter initials");
+Part3_window * scoreboard = new Part3_window(width,height,"Initials");
 
 Part3_window::Part3_window(int w, int h, const char* title = 0) :
 
@@ -8,11 +7,11 @@ Part3_window::Part3_window(int w, int h, const char* title = 0) :
 	x{100},
 	y{100},
 	score1_txt(y, x, 125, 12),
-	score2_txt(y, x + 200,125,12),
-	score3_txt(y, x + 300,125,12),
-	score4_txt(y, x + 400,125,12),
-	score5_txt(y, x + 500,125,12),
-	score6_txt(y, x + 600,125,12),
+	score2_txt(y, x + 100,125,12),
+	score3_txt(y, x + 200,125,12),
+	score4_txt(y, x + 300,125,12),
+	score5_txt(y, x + 400,125,12),
+	score6_txt(y, x + 500,125,12),
 	inbox(90,0,150, 20, "Enter Initials"),
 	start_game(w-70,0, 70, 20, "Start Game"),
    	enter_button(240, 0, 70,20, "Enter"),

@@ -18,7 +18,7 @@
 #include "part3_window.h" 
 #include "part6_window.h"
 //---------------win1----------------------------
-extern double points;
+extern int points;
 extern Fl_Window win1;
 //buttton
 void start_callback(Fl_Widget* w , void* start_but);

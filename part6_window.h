@@ -19,12 +19,12 @@ private:
 	Fl_Box score4_txt;
 	Fl_Box score5_txt;
 	Fl_Box score6_txt;
+	std::vector<std::vector<std::string> > results;
 	Fl_Button play_again;    // play again 
 	Fl_Button quit_game;     // end game
 	
 	
 	std::vector<std::vector<std::string> > score_read();
-	std::vector<std::vector<std::string> > results;
 	
 	void init_scores(); 
 

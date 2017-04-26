@@ -10,7 +10,7 @@ void red_callback( Fl_Widget* w, void* choice);
 void white_callback( Fl_Widget*w , void* choice);
 
 void game_over();
-void score_to_file(double points);
+void score_to_file(int points);
 void show_result();
 void show_countdown(int time);
 void update_score(double points, double percent_correct);
