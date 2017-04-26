@@ -23,7 +23,10 @@ extern Fl_Button blue;
 extern Fl_Box box;
 extern Fl_Box score;
 extern Fl_Box comp_right;
+/****************IMAGES************************/
+void backImage();
 
+/*****************************************************/
 // number of rounds
 extern Fl_Box rounds;
 void num_rounds(); 
