@@ -25,6 +25,11 @@ extern Fl_Box score;
 extern Fl_Box comp_right;
 /****************IMAGES************************/
 void backImage();
+extern Fl_JPEG_Image image2;
+extern Fl_JPEG_Image image3;
+extern Fl_JPEG_Image image4;
+extern Fl_Box background2;
+
 
 /*****************************************************/
 // number of rounds
