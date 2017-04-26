@@ -191,6 +191,19 @@ void show_result()
 	update_score(points, comp_correct_per);
 	game_over();
 }
+void score_to_file(double points)
+{
+
+	if (NUM_ROUNDS == 0)
+	{
+		
+		std::string newInput = std::to_string(points);
+		std::ofstream file2("initials.txt", std::ios::app | std::ios::binary);
+		file2 << newInput;
+		file2.close();
+		
+	}
+}
 
 void game_over()
 {
@@ -202,6 +215,7 @@ void game_over()
 		red.deactivate();
 		white.deactivate();
 		blue.deactivate();
+		continue_game.activate();
 	}
 }
 
