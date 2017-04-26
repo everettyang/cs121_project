@@ -1,14 +1,8 @@
 #include "splash_screen.h" 
 int main()
 {
-	animation.image(image);
-	animation1.image(image1);
-
-	animation1.hide();
-	animation.set_changed();
-	background.image(bg);
-	Fl::add_timeout(.05, animate);
-
+	backImage();
+	
 	start.callback(start_callback);
 	starte.callback(starte_callback);
 

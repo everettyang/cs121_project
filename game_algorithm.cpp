@@ -18,6 +18,15 @@ Fl_Box score(400,400,100,100,"Points: 0");
 Fl_Box comp_right(300,100,100,100,"Percent computer correct:\n\t0%");
 
 //---------------------------------------- callbacks-----------------------
+void backImage(){
+	animation.image(image);
+	animation1.image(image1);
+	animation1.hide();
+	animation.set_changed();
+	background.image(bg);
+	Fl::add_timeout(.05, animate);	
+}
+
 
 void blue_callback(Fl_Widget* , void *) {
 
