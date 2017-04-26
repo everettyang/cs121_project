@@ -9,7 +9,8 @@ struct Part3_window : Fl_Window
 Part3_window(int w, int h, const char* title);
 
 private:
-	int txt_height;
+	int y;
+	int x;
 	Fl_Box score1_txt;
 	Fl_Box score2_txt;
 	Fl_Box score3_txt;

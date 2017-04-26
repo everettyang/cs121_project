@@ -5,13 +5,14 @@ Part3_window scoreboard(width, height, "Enter initials");
 Part3_window::Part3_window(int w, int h, const char* title = 0) :
 
 	Fl_Window(w,h,title),
-	txt_height{95},
-	score1_txt(50,txt_height, 125, 12),
-	score2_txt(50, txt_height + 100,125,12),
-	score3_txt(50, txt_height + 200,125,12),
-	score4_txt(50, txt_height + 300,125,12),
-	score5_txt(50, txt_height + 400,125,12),
-	score6_txt(50,txt_height + 500,125,12),
+	x{100},
+	y{100},
+	score1_txt(y, x, 125, 12),
+	score2_txt(y, x + 200,125,12),
+	score3_txt(y, x + 300,125,12),
+	score4_txt(y, x + 400,125,12),
+	score5_txt(y, x + 500,125,12),
+	score6_txt(y, x + 600,125,12),
 	inbox(90,0,150, 20, "Enter Initials"),
 	start_game(w-70,0, 70, 20, "Start Game"),
    	enter_button(240, 0, 70,20, "Enter"),
@@ -28,7 +29,7 @@ void Part3_window::init_scores()
 {
 	score = score_read();
 	initials = initials_read();
-	
+
 	score1_txt.copy_label(results(0, initials, score));
 	score2_txt.copy_label(results(1, initials, score));
 	score3_txt.copy_label(results(2, initials, score));
@@ -100,16 +101,18 @@ void Part3_window::set_inbox_error() { inbox.value("Enter valid initials!"); }
 std::string Part3_window::file_write()
 {
 	std::string newInput = inbox.value();
+
 	if (newInput.size() > 3 || newInput.empty())
 	{
 		set_inbox_error();
 		return "error";
 	}
+	enter_button.deactivate();
 
 	valid_initials_entered = true;
 
 	std::ofstream file2("initials.txt", std::ios::app);
-	file2 << newInput;
+	file2 << newInput << '\n';
 	file2.close();
 	return newInput;
 

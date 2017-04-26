@@ -5,19 +5,41 @@ std::vector< std::vector<int> > choices{{0,1},{0,2},{0,3},{0}};
 const char* label = "Next round";
 
 Fl_Window win(width,height, "Guessing Game");
-Fl_Box rounds(300,300,300,50);
-
-Fl_Button time_right(450,350,75,75,"START");
-Fl_Box time_left(300,200,300,100,"Time left");
-
-Fl_Button red(250,350,75,75, "Red");
-Fl_Button white(350,350,75,75, "White");
-Fl_Button blue(150,350,75,75,"Blue");
-Fl_Box box(50,50,200,200,"Choose an option");
-Fl_Box score(400,400,100,100,"Points: 0");
-Fl_Box comp_right(300,100,100,100,"Percent computer correct:\n\t0%");
+/********************************************/
+Fl_Box background2(0,0,width,height);
+/********************************************/
+Fl_Box rounds(700,130,300,50);
+/********************************************/
+Fl_JPEG_Image p4bg("materials/normal_naruto1.jpg");
+/********************************************/
+Fl_Button time_right(415,350,150,75,"START");
+Fl_Box time_left(700,0,300,100,"Time left");
+/***********Blue button**************/
+Fl_Button blue(300,450,100,155,"Kunai");
+Fl_JPEG_Image image4("materials/kunaiOpt.jpg");
+/***********white button**************/	
+Fl_Button white(425,450,100,100, "Shuriken");
+Fl_JPEG_Image image3("materials/shurikenImg.jpg");
+/***********red button**************/	
+Fl_Button red(550,450,100,155, "Explodin Note");
+Fl_JPEG_Image image2("materials/expNote.jpg");
+/********************************************/
+Fl_Box box(50,50,400,50,"Choose an option");
+Fl_Box score(820,200,100,100,"Points: 0");
+Fl_Box comp_right(800,50,100,100,"Percent computer correct:\n\t0%");
 
 //---------------------------------------- callbacks-----------------------
+void backImage(){
+	animation.image(image);
+	animation1.image(image1);
+	animation1.hide();
+	animation.set_changed();
+	background.image(bg);
+	background2.image(p4bg);
+	Fl::add_timeout(.05, animate);	
+	
+}
+
 
 void blue_callback(Fl_Widget* , void *) {
 
@@ -94,6 +116,7 @@ void timer(void*) {
 
 		time_right.activate();
 		NUM_ROUNDS = NUM_ROUNDS - 1;
+		game_over();
 		num_rounds();
 
 		
@@ -173,7 +196,7 @@ void game_over()
 {
 	//finish the game if num rounds is 0 
 	
-	if (NUM_ROUNDS == 0)
+	if (NUM_ROUNDS <= 0)
 	{
 		time_right.deactivate();
 		red.deactivate();
