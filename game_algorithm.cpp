@@ -27,6 +27,7 @@ Fl_JPEG_Image image2("materials/expNote.jpg");
 Fl_Box box(50,50,400,50,"Choose an option");
 Fl_Box score(820,200,100,100,"Points: 0");
 Fl_Box comp_right(800,50,100,100,"Percent computer correct:\n\t0%");
+Fl_Button continue_game(100,100, 100,100, "Play again?");
 
 //---------------------------------------- callbacks-----------------------
 void backImage(){
@@ -127,6 +128,11 @@ void timer(void*) {
       } 
 }
 
+void continue_button(Fl_Widget*, void*) {
+		win.hide();
+		finalscore.show();
+	
+}
 //---------------------------------------- game logic-----------------------
 
 void show_countdown(int time)
@@ -170,7 +176,6 @@ void show_result()
 {
 	NUM_ROUNDS -= 1;
 	num_rounds();
-	static double points;
 	static double comp_correct;
 	static double comp_correct_per;
 	double total_choices = choices[0][0] + choices[1][0] + choices[2][0];
@@ -211,6 +216,7 @@ void game_over()
 	
 	if (NUM_ROUNDS <= 0)
 	{
+		points = 0;
 		time_right.deactivate();
 		red.deactivate();
 		white.deactivate();

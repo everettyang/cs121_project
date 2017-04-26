@@ -45,5 +45,9 @@ void timer(void *);
 extern Fl_Button time_right;
 extern Fl_Box time_left;
 
+//continue 
+void continue_button(Fl_Widget* w, void*);
+extern Fl_Button continue_game;
+
 
 #endif //GAME_ALG
