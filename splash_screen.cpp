@@ -6,6 +6,7 @@
 int width = 1000;
 int height = 1000;
 int NUM_ROUNDS = 32;
+double points = 0;
 Fl_Window win1(width,height, "Outsmart the Computer");
 //buttton
 Fl_Box background(0,0,width,height);
@@ -21,30 +22,29 @@ Fl_Button start(450,350,75,75,"START");
 Fl_Box name(450,50,100,200,"OUTSMART THE COMPUTER!");
 Fl_Box teamm(450,180,80,80,"Team number: 26");
 Fl_Box teamn(450,200,100,200,"Team members:\n Scott Tran, Cesar Villanueva-Vazquez, Haozhen Yang, Everett Yang.");
+Fl_Box teamname(450,220,80,80,"Team name: The Eh-Team");
 //---------------winexplain----------------------------
 Fl_Window wine(width,height, "Instructions");
 //button
-Fl_Button starte(450,700,75,75,"Next");
+Fl_Button starte(450,350,75,75,"Next");
 //box explain
-Fl_Box explain(100,0,50,50,"INSTRUCTIONS:");
-Fl_Box ed(FL_UP_BOX, 100,100,500,200, "First, the game will ask the user to select the difficulty. \n The computer will try to guess the user's choice. \nIf the computer guesses wrong then the user gets 10 points.\n The number of rounds vary based on difficulty.\n In the end, the user will be shown how his/her score ranks among the top 5 scores.");
+Fl_Box explain(250,10,100,200,"How to play:");
+Fl_Box ed(350,60,300,200,"First, the game will ask the user to select the difficulty. \n The computer will try to guess the user's choice. \nIf the computer guesses wrong then the user gets 10 points.\n The number of rounds vary based on difficulty.\n In the end, the user will be shown how his/her score ranks among the top 5 scores.");
 
 //--------------win2-----------------------
 Fl_Window win2(width,height, "Select Difficulty");
-Fl_Box bg1(0,0,width,height);
-Fl_JPEG_Image im1("materials/Konoha.jpg");
 //box
 Fl_Box difficulty(450,10,100,200,"Which level would you like to play?");
 //button1
-Fl_Button l1(300,450,75,75,"Level 1");
+Fl_Button l1(300,250,75,75,"Level 1");
 //button2
-Fl_Button l2(400,450,75,75,"Level 2");
+Fl_Button l2(400,250,75,75,"Level 2");
 //button3
-Fl_Button l3(500,450,75,75,"Level 3");
+Fl_Button l3(500,250,75,75,"Level 3");
 //button4
-Fl_Button l4(600,450,75,75,"Level 4");
+Fl_Button l4(600,250,75,75,"Level 4");
 //button5
-Fl_Button l5(700,450,75,75,"Level 5");
+Fl_Button l5(700,250,75,75,"Level 5");
 
 void animate_helper(int x, int y)
 {

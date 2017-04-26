@@ -16,7 +16,9 @@
 #include <time.h>
 #include "game_algorithm.h" 
 #include "part3_window.h" 
+#include "part6_window.h"
 //---------------win1----------------------------
+extern double points;
 extern Fl_Window win1;
 //buttton
 void start_callback(Fl_Widget* w , void* start_but);
@@ -26,6 +28,7 @@ extern int width,height;
 extern Fl_Box name;
 extern Fl_Box teamm;
 extern Fl_Box teamn;
+extern Fl_Box teamname;
 
 extern Fl_Box animation;
 extern Fl_Box animation1;
@@ -44,8 +47,6 @@ extern Fl_Box ed;
 
 //--------------win2-----------------------
 extern Fl_Window win2;
-extern Fl_Box bg1;
-extern Fl_JPEG_Image im1;
 //box
 extern Fl_Box difficulty;
 //button1
