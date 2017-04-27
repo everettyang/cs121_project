@@ -20,9 +20,12 @@
 #include "part6_window.h"
 //---------------win1----------------------------
 extern int points;
+extern const char* score_file;
+extern const char* initial_file;
 extern Fl_Window win1;
 //buttton
 void start_callback(Fl_Widget* w , void* start_but);
+void select_file(int file);
 extern Fl_Button start;
 //box
 extern int width,height;

@@ -23,38 +23,39 @@ Part6_window::Part6_window(int w, int h, const char* title = 0) :
 	quit_game.callback(quitgame_callback, this);
 	end();
 }	
+
 void Part6_window::write_file()
 {
-
+	//prepends '> ' to the file name
 	std::ofstream file;
 	std::ofstream file1;
 
+	std::string arrow = "> ";
+	std::string i = arrow + initial_file;
+	std::string s = arrow + score_file;
+	const char* initials = i.c_str();
+	const char* scores = s.c_str();
 	//uses bash to clear score and initial files
-	system("> scoretxtFile.txt");
-	system("> initials.txt");
+	system(scores);
+	system(initials);
 
 	if (elements > 5){ elements = 5;}
 
-	std::cout << "elements: " << elements << std::endl;
 	for (int i = 0; i < elements; ++i)
 	{
-
-
 		//puts results into file
-		std::cout << "results vector at write: " << results[i][0] << std::endl;
-		file.open("scoretxtFile.txt", std::ios::app);
-		file1.open("initials.txt", std::ios::app);
+		file.open(score_file, std::ios::app);
+		file1.open(initial_file, std::ios::app);
 
 		file << results[i][1] << std::endl;
 		file1 << results[i][0] << std::endl;
 
 		file.close();
 		file1.close();
-
-
 	}
 
 }
+
 void Part6_window::init_scores()
 {
 	//shows the final score screen by updating all the boxes on score screen
@@ -62,6 +63,7 @@ void Part6_window::init_scores()
 	if (!(results.size() < 2))
 	std::sort(results.begin(), results.end() - 1, [](const std::vector<std::string>& a,const std::vector<std::string>& b) {return a[1] > b[1];} );
 	
+	//change the lables on the score boxes
 	score1_txt.copy_label(stats(0, results));
 	score2_txt.copy_label(stats(1, results));
 	score3_txt.copy_label(stats(2, results));
@@ -72,10 +74,12 @@ void Part6_window::init_scores()
 
 std::vector<std::vector<std::string> > Part6_window::score_read()
 {
+	//reads from score and initial file
+
 	std::string line;
 	elements += 1;
 
-	std::ifstream file1("initials.txt");
+	std::ifstream file1(initial_file);
 	 if (file1.is_open())
 	 {
 		for(int i = 0; i < results.size(); ++i)
@@ -89,8 +93,9 @@ std::vector<std::vector<std::string> > Part6_window::score_read()
 		 file1.close();
 	 }
 	
+	//assigns the second index of column to score
 	std::string line2;
-	std::ifstream file3("scoretxtFile.txt");
+	std::ifstream file3(score_file);
 		if(file3.is_open())
 		{
 		
@@ -100,13 +105,11 @@ std::vector<std::vector<std::string> > Part6_window::score_read()
 				{
 				results[i][1] = line2;
 				}
-				
 			}
 		file3.close();
 		}
 
 	return results;
-
 }
 const char* Part6_window::stats(int index, std::vector<std::vector<std::string> > results)
 {
@@ -129,7 +132,6 @@ const char* Part6_window::stats(int index, std::vector<std::vector<std::string> 
 
 void Part6_window::update_part3()
 {
-
 	//updates initials scoreboard
 	scoreboard->score1_txt.copy_label(stats(0, results));
 	scoreboard->score2_txt.copy_label(stats(1, results));
@@ -154,14 +156,6 @@ void Part6_window::playagain_callback(Fl_Widget*, void* v)
 	scoreboard->enter_button.activate();
 	scoreboard->init_scores();
 
-	std::cout << "after init_scores" << std::endl;
-	for (int i = 0; i < p6->results.size(); ++i)
-	{
-		std::cout << "initials at playback button: " << p6->results[i][0] << std::endl;
-		std::cout << "score at playback button: " <<  p6->results[i][1] << std::endl;
-
-	}
-
 	//shows difficulty selector and deactivates the play again button
 	win2.show();	
 	continue_game.deactivate();
@@ -170,13 +164,7 @@ void Part6_window::playagain_callback(Fl_Widget*, void* v)
 	p6->write_file();
 	p6->update_part3();
 
-	for (int i = 0; i < p6->results.size(); ++i)
-	{
-		std::cout << "initials after playback button: " << p6->results[i][0] << std::endl;
-		std::cout << "score after playback button: " <<  p6->results[i][1] << std::endl;
-
 	}
-}
 
 void Part6_window::quitgame_callback(Fl_Widget*, void*v)
 {

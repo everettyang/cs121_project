@@ -2,7 +2,7 @@
 Part3_window * scoreboard = new Part3_window(width,height,"Initials");
 
 Part3_window::Part3_window(int w, int h, const char* title = 0) :
-
+	
 	Fl_Window(w,h,title),
 	x{100},
 	y{100},
@@ -41,7 +41,7 @@ std::vector<std::string> Part3_window::score_read()
 {
 	std::string line2;
 	std::vector<std::string>vecScore(6, "---");
-	std::ifstream file3("scoretxtFile.txt");
+	std::ifstream file3(score_file);
 		if(file3.is_open())
 		{
 			for(int i = 0; i < vecScore.size(); ++i)
@@ -66,7 +66,7 @@ std::vector<std::string> Part3_window::initials_read()
 
 	std::vector<std::string>vecInit{6, "---"};
 
-	std::ifstream file1("initials.txt");
+	std::ifstream file1(initial_file);
 	 if (file1.is_open())
 	 {
 		// while (getline(file1, line))
@@ -118,7 +118,7 @@ std::string Part3_window::file_write()
 
 	valid_initials_entered = true;
 
-	std::ofstream file2("initials.txt", std::ios::app);
+	std::ofstream file2(initial_file, std::ios::app);
 	file2 << newInput << '\n';
 	file2.close();
 	return newInput;

@@ -10,19 +10,19 @@ Fl_Box background2(0,0,width,height);
 /********************************************/
 Fl_Box rounds(700,130,300,50);
 /********************************************/
-Fl_JPEG_Image p4bg("materials/normal_naruto1.jpg");
+Fl_JPEG_Image p4bg("images/normal_naruto1.jpg");
 /********************************************/
 Fl_Button time_right(415,350,150,75,"START");
 Fl_Box time_left(700,0,300,100,"Time left");
 /***********Blue button**************/
 Fl_Button blue(300,450,100,155,"Kunai");
-Fl_JPEG_Image image4("materials/kunaiOpt.jpg");
+Fl_JPEG_Image image4("images/kunaiOpt.jpg");
 /***********white button**************/	
 Fl_Button white(425,450,100,100, "Shuriken");
-Fl_JPEG_Image image3("materials/shurikenImg.jpg");
+Fl_JPEG_Image image3("images/shurikenImg.jpg");
 /***********red button**************/	
 Fl_Button red(550,450,100,155, "Explodin Note");
-Fl_JPEG_Image image2("materials/expNote.jpg");
+Fl_JPEG_Image image2("images/expNote.jpg");
 /********************************************/
 Fl_Box box(50,50,400,50,"Choose an option");
 Fl_Box score(820,200,100,100,"Points: 0");
@@ -207,7 +207,7 @@ void score_to_file()
 {
 
 	std::string newInput = std::to_string(points);
-	std::ofstream file2("scoretxtFile.txt", std::ios::app | std::ios::binary);
+	std::ofstream file2(score_file, std::ios::app | std::ios::binary);
 	file2 << newInput << std::endl;
 	file2.close();
 		

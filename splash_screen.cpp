@@ -7,15 +7,17 @@ int width = 1000;
 int height = 1000;
 int NUM_ROUNDS = 32;
 int points = 0;
+const char* score_file = "";
+const char* initial_file = "";
 Fl_Window win1(width,height, "Outsmart the Computer");
 //buttton
 Fl_Box background(0,0,width,height);
 Fl_Box animation(999,100,200,100);
 Fl_Box animation1(999,100,200,100);
 
-Fl_JPEG_Image bg("materials/white.jpg");
-Fl_GIF_Image image("materials/naruto1.gif");
-Fl_GIF_Image image1("materials/naruto2.gif");
+Fl_JPEG_Image bg("images/white.jpg");
+Fl_GIF_Image image("images/naruto1.gif");
+Fl_GIF_Image image1("images/naruto2.gif");
 
 Fl_Button start(450,350,75,75,"START");
 //box
@@ -92,7 +94,11 @@ void starte_callback(Fl_Widget* , void *) {
 	
 }
 
+
+
 void l1_callback(Fl_Widget* , void *) {
+	score_file = "scorefiles/scoretxtFile.txt";
+	initial_file = "scorefiles/initials.txt";
 	win2.hide();
 	scoreboard->show();
 	NUM_ROUNDS = NUM_ROUNDS * 1;
@@ -101,6 +107,8 @@ void l1_callback(Fl_Widget* , void *) {
 }
 
 void l2_callback(Fl_Widget* , void *) {
+	score_file = "scorefiles/scoretxtFile1.txt";
+	initial_file = "scorefiles/initials1.txt";
 	win2.hide();
 	scoreboard->show();
 	NUM_ROUNDS = NUM_ROUNDS * 2;
@@ -109,6 +117,8 @@ void l2_callback(Fl_Widget* , void *) {
 }
 	
 void l3_callback(Fl_Widget* , void *) {
+	score_file = "scorefiles/scoretxtFile2.txt";
+	initial_file = "scorefiles/initials2.txt";
 	win2.hide();
 	scoreboard->show();
 	NUM_ROUNDS = NUM_ROUNDS * 4;
@@ -116,6 +126,8 @@ void l3_callback(Fl_Widget* , void *) {
 	
 }
 void l4_callback(Fl_Widget* , void *) {
+	score_file = "scorefiles/scoretxtFile3.txt";
+	initial_file = "scorefiles/initials3.txt";
 	win2.hide();
 	scoreboard->show();
 	NUM_ROUNDS = NUM_ROUNDS * 8;
@@ -123,6 +135,8 @@ void l4_callback(Fl_Widget* , void *) {
 	
 }
 void l5_callback(Fl_Widget* , void *) {
+	score_file = "scorefiles/scoretxtFile4.txt";
+	initial_file = "scorefiles/initials4.txt";
 	win2.hide();
 	scoreboard->show();
 	NUM_ROUNDS = NUM_ROUNDS * 16;
