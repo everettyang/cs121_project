@@ -30,6 +30,7 @@ private:
 	
 	void write_file(); 
 
+	void update_part3(); 
 	static void quitgame_callback(Fl_Widget*, void*v); 
 	static void playagain_callback(Fl_Widget*, void*v);
 	

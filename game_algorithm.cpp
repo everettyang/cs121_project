@@ -208,7 +208,7 @@ void score_to_file()
 
 	std::string newInput = std::to_string(points);
 	std::ofstream file2("scoretxtFile.txt", std::ios::app | std::ios::binary);
-	file2 << newInput << '\n';
+	file2 << newInput << std::endl;
 	file2.close();
 		
 }

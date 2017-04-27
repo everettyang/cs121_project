@@ -3,7 +3,7 @@
 Part6_window finalscore(width,height,"Final Score");
 
 Part6_window::Part6_window(int w, int h, const char* title = 0) :
-
+	//constructs window and the boxes for score entries
 	Fl_Window(w,h,title),
 	elements{0},
 	x{95},
@@ -18,34 +18,46 @@ Part6_window::Part6_window(int w, int h, const char* title = 0) :
 	play_again(300,700, 150, 20, "Continue game"),
    	quit_game(470, 700, 150,20, "End game")
 {
+	//attach callbacks
 	play_again.callback(playagain_callback, this);
 	quit_game.callback(quitgame_callback, this);
 	end();
 }	
 void Part6_window::write_file()
 {
-		system("> scoretxtFile.txt");
-		system("> initials.txt");
+
+	std::ofstream file;
+	std::ofstream file1;
+
+	//uses bash to clear score and initial files
+	system("> scoretxtFile.txt");
+	system("> initials.txt");
+
+	if (elements > 5){ elements = 5;}
+
+	std::cout << "elements: " << elements << std::endl;
 	for (int i = 0; i < elements; ++i)
 	{
-		//clears files
 
-		std::ofstream file("scoretxtFile.txt");
-		std::ofstream file1("initials.txt");
 
-		std::cout << "score written: " << results[i][1] << std::endl;
-		std::cout << "initials written: " << results[i][0] << std::endl;
+		//puts results into file
+		std::cout << "results vector at write: " << results[i][0] << std::endl;
+		file.open("scoretxtFile.txt", std::ios::app);
+		file1.open("initials.txt", std::ios::app);
 
-		file << results[i][1] << '\n';
-		file1 << results[i][0] << '\n';
+		file << results[i][1] << std::endl;
+		file1 << results[i][0] << std::endl;
 
 		file.close();
 		file1.close();
+
+
 	}
 
 }
 void Part6_window::init_scores()
 {
+	//shows the final score screen by updating all the boxes on score screen
 	score_read();
 	if (!(results.size() < 2))
 	std::sort(results.begin(), results.end() - 1, [](const std::vector<std::string>& a,const std::vector<std::string>& b) {return a[1] > b[1];} );
@@ -61,6 +73,7 @@ void Part6_window::init_scores()
 std::vector<std::vector<std::string> > Part6_window::score_read()
 {
 	std::string line;
+	elements += 1;
 
 	std::ifstream file1("initials.txt");
 	 if (file1.is_open())
@@ -70,9 +83,7 @@ std::vector<std::vector<std::string> > Part6_window::score_read()
 			if (getline(file1, line))
 			{
 			
-		std::cout << line  << std::endl;
-			 results[i][0] = line;
-			elements += 1;
+			results[i][0] = line;
 			}
 		}
 		 file1.close();
@@ -108,6 +119,7 @@ const char* Part6_window::stats(int index, std::vector<std::vector<std::string> 
 	else if (index > results.size() - 1) ss << index + 1 << ". " << results[index][0] << "\t\t" << "---"; 
 	else ss << index + 1 << ". " << results[index][0] << "\t\t" << results[index][1];   
 
+	//converts to cstr
 	std::string temp = ss.str();
 	const char* cstr = temp.c_str();
 	std::cout << "part 6 results: " << cstr << std::endl;
@@ -115,25 +127,60 @@ const char* Part6_window::stats(int index, std::vector<std::vector<std::string> 
 
 }
 
+void Part6_window::update_part3()
+{
 
+	//updates initials scoreboard
+	scoreboard->score1_txt.copy_label(stats(0, results));
+	scoreboard->score2_txt.copy_label(stats(1, results));
+	scoreboard->score3_txt.copy_label(stats(2, results));
+	scoreboard->score4_txt.copy_label(stats(3, results));
+	scoreboard->score5_txt.copy_label(stats(4, results));
+	scoreboard->score6_txt.copy_label(stats(5, results));
+}
  
 void Part6_window::playagain_callback(Fl_Widget*, void* v)
 {
+	//casts void pointer to Part6_window pointer
+        Part6_window* p6 = (Part6_window*)v;
+	//resets all global variables for rounds and points
 	NUM_ROUNDS = 32;
 	points = 0;
+	//activates the next round button
 	time_right.activate();
-	((Part6_window*)v)->hide();
+	p6->hide();
 
+	//turns on the enter button for initial input
 	scoreboard->enter_button.activate();
 	scoreboard->init_scores();
 
+	std::cout << "after init_scores" << std::endl;
+	for (int i = 0; i < p6->results.size(); ++i)
+	{
+		std::cout << "initials at playback button: " << p6->results[i][0] << std::endl;
+		std::cout << "score at playback button: " <<  p6->results[i][1] << std::endl;
+
+	}
+
+	//shows difficulty selector and deactivates the play again button
 	win2.show();	
 	continue_game.deactivate();
-	((Part6_window*)v)->write_file();
+
+	//writes to file and updates part 3
+	p6->write_file();
+	p6->update_part3();
+
+	for (int i = 0; i < p6->results.size(); ++i)
+	{
+		std::cout << "initials after playback button: " << p6->results[i][0] << std::endl;
+		std::cout << "score after playback button: " <<  p6->results[i][1] << std::endl;
+
+	}
 }
 
 void Part6_window::quitgame_callback(Fl_Widget*, void*v)
 {
+	//hides part 6 window and writes sorted top scores to file
 	((Part6_window*)v)->hide();
 	((Part6_window*)v)->write_file();
 }
