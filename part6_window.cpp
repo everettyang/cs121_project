@@ -1,5 +1,7 @@
 #include "splash_screen.h"
 
+Part6_window finalscore(width,height,"Final Score");
+
 Part6_window::Part6_window(int w, int h, const char* title = 0) :
 
 	Fl_Window(w,h,title),
@@ -16,24 +18,27 @@ Part6_window::Part6_window(int w, int h, const char* title = 0) :
 	play_again(300,700, 150, 20, "Continue game"),
    	quit_game(470, 700, 150,20, "End game")
 {
-	init_scores();
 	play_again.callback(playagain_callback, this);
 	quit_game.callback(quitgame_callback, this);
 	end();
 }	
 void Part6_window::write_file()
 {
-	for (int i = 0; i <= elements; ++i)
-	{
-		//clears files
-	std::cout << "i: " << i << std::endl;
 		system("> scoretxtFile.txt");
 		system("> initials.txt");
-	std::cout << "score" << std::endl;
+	for (int i = 0; i < elements; ++i)
+	{
+		//clears files
+
 		std::ofstream file("scoretxtFile.txt");
 		std::ofstream file1("initials.txt");
+
+		std::cout << "score written: " << results[i][1] << std::endl;
+		std::cout << "initials written: " << results[i][0] << std::endl;
+
 		file << results[i][1] << '\n';
 		file1 << results[i][0] << '\n';
+
 		file.close();
 		file1.close();
 	}
@@ -42,10 +47,8 @@ void Part6_window::write_file()
 void Part6_window::init_scores()
 {
 	score_read();
-	std::cout << "init_score" << std::endl;
 	if (!(results.size() < 2))
 	std::sort(results.begin(), results.end() - 1, [](const std::vector<std::string>& a,const std::vector<std::string>& b) {return a[1] > b[1];} );
-	std::cout << "init_score1" << std::endl;
 	
 	score1_txt.copy_label(stats(0, results));
 	score2_txt.copy_label(stats(1, results));
@@ -54,6 +57,7 @@ void Part6_window::init_scores()
 	score5_txt.copy_label(stats(4, results));
 	score6_txt.copy_label(stats(5, results));
 }
+
 std::vector<std::vector<std::string> > Part6_window::score_read()
 {
 	std::string line;
@@ -68,14 +72,13 @@ std::vector<std::vector<std::string> > Part6_window::score_read()
 			
 		std::cout << line  << std::endl;
 			 results[i][0] = line;
-			elements++;
+			elements += 1;
 			}
 		}
 		 file1.close();
 	 }
 	
 	std::string line2;
-	std::cout << "score read mid" << std::endl;
 	std::ifstream file3("scoretxtFile.txt");
 		if(file3.is_open())
 		{
@@ -90,7 +93,6 @@ std::vector<std::vector<std::string> > Part6_window::score_read()
 			}
 		file3.close();
 		}
-	std::cout << "score read end" << std::endl;
 
 	return results;
 
@@ -108,7 +110,7 @@ const char* Part6_window::stats(int index, std::vector<std::vector<std::string> 
 
 	std::string temp = ss.str();
 	const char* cstr = temp.c_str();
-	std::cout << "results: " << cstr << std::endl;
+	std::cout << "part 6 results: " << cstr << std::endl;
 	return cstr;
 
 }
@@ -121,6 +123,10 @@ void Part6_window::playagain_callback(Fl_Widget*, void* v)
 	points = 0;
 	time_right.activate();
 	((Part6_window*)v)->hide();
+
+	scoreboard->enter_button.activate();
+	scoreboard->init_scores();
+
 	win2.show();	
 	continue_game.deactivate();
 	((Part6_window*)v)->write_file();

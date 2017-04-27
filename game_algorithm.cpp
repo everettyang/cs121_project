@@ -131,13 +131,12 @@ void timer(void*) {
 void continue_button(Fl_Widget*, void*) {
 		score_to_file();
 		win.hide();
-		delete scoreboard;
 		std::cout << 1 << std::endl;
-		static Part6_window * finalscore = new Part6_window (width,height,"Score");
-
-		std::cout << 12<< std::endl;
-		finalscore->show();
-		std::cout << 12<< std::endl;
+		//static Part6_window * finalscore = new Part6_window (width,height,"Score");
+		finalscore.show();
+		finalscore.init_scores();
+			
+		//finalscore->show();
 	
 }
 //---------------------------------------- game logic-----------------------
@@ -203,18 +202,15 @@ void show_result()
 	update_score(points, comp_correct_per);
 	game_over();
 }
+
 void score_to_file()
 {
 
-	if (NUM_ROUNDS == 0)
-	{
+	std::string newInput = std::to_string(points);
+	std::ofstream file2("scoretxtFile.txt", std::ios::app | std::ios::binary);
+	file2 << newInput << '\n';
+	file2.close();
 		
-		std::string newInput = std::to_string(points);
-		std::ofstream file2("scoretxtFile.txt", std::ios::app | std::ios::binary);
-		file2 << newInput << '\n';
-		file2.close();
-		
-	}
 }
 
 void game_over()
@@ -223,7 +219,6 @@ void game_over()
 	
 	if (NUM_ROUNDS <= 0)
 	{
-		points = 0;
 		time_right.deactivate();
 		red.deactivate();
 		white.deactivate();

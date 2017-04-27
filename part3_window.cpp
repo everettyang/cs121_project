@@ -47,8 +47,9 @@ std::vector<std::string> Part3_window::score_read()
 		{
 			for(int i = 0; i < vecScore.size(); ++i)
 			{
-				if (getline(file3, line2) || !file3.eof())
+				if (getline(file3, line2))
 					vecScore.at(i) = line2;
+
 			std::cout << 2 << std::endl;
 			}
 		file3.close();
@@ -72,7 +73,7 @@ std::vector<std::string> Part3_window::initials_read()
 		// while (getline(file1, line))
 			for(int i = 0; i < vecInit.size(); ++i)
 		 {
-			if (getline(file1, line) || !file1.eof())
+			if (getline(file1, line))
 				 vecInit.at(i) = line;
 			 
 		 }
@@ -125,6 +126,8 @@ std::string Part3_window::file_write()
 void Part3_window::startgame_callback(Fl_Widget*, void*v)
 {
 Part3_window * p3  = ((Part3_window *)v);
+
+update_score(0,0);
 
 if (!(p3->valid_initials_entered))
 {

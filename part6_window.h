@@ -8,7 +8,8 @@ struct Part6_window : Fl_Window
 
 Part6_window(int w, int h, const char* title);
 
-	
+void init_scores(); 
+
 
 private:
 	int elements;
@@ -20,14 +21,13 @@ private:
 	Fl_Box score4_txt;
 	Fl_Box score5_txt;
 	Fl_Box score6_txt;
+	std::vector<std::vector<std::string> > score_read();
 	std::vector<std::vector<std::string> > results;
 	Fl_Button play_again;    // play again 
 	Fl_Button quit_game;     // end game
 	
 	
-	std::vector<std::vector<std::string> > score_read();
 	
-	void init_scores(); 
 	void write_file(); 
 
 	static void quitgame_callback(Fl_Widget*, void*v); 
