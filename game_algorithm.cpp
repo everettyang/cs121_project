@@ -129,13 +129,14 @@ void timer(void*) {
 }
 
 void continue_button(Fl_Widget*, void*) {
+		score_to_file();
 		win.hide();
 		delete scoreboard;
 		std::cout << 1 << std::endl;
-		static Part6_window finalscore(width,height,"Score");
+		static Part6_window * finalscore = new Part6_window (width,height,"Score");
 
 		std::cout << 12<< std::endl;
-		finalscore.show();
+		finalscore->show();
 		std::cout << 12<< std::endl;
 	
 }
@@ -199,11 +200,10 @@ void show_result()
 		points += 10;
 	}
 
-	score_to_file(points);
 	update_score(points, comp_correct_per);
 	game_over();
 }
-void score_to_file(int points)
+void score_to_file()
 {
 
 	if (NUM_ROUNDS == 0)
@@ -211,7 +211,7 @@ void score_to_file(int points)
 		
 		std::string newInput = std::to_string(points);
 		std::ofstream file2("scoretxtFile.txt", std::ios::app | std::ios::binary);
-		file2 << newInput;
+		file2 << newInput << '\n';
 		file2.close();
 		
 	}

@@ -11,6 +11,7 @@ Part6_window(int w, int h, const char* title);
 	
 
 private:
+	int elements;
 	int x;
 	int y;
 	Fl_Box score1_txt;
@@ -27,6 +28,7 @@ private:
 	std::vector<std::vector<std::string> > score_read();
 	
 	void init_scores(); 
+	void write_file(); 
 
 	static void quitgame_callback(Fl_Widget*, void*v); 
 	static void playagain_callback(Fl_Widget*, void*v);

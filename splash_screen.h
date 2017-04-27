@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <sstream>
 #include <fstream>
+#include <stdlib.h>
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Button.H>

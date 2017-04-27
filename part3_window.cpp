@@ -39,17 +39,21 @@ void Part3_window::init_scores()
 }
 std::vector<std::string> Part3_window::score_read()
 {
+	std::cout << 1 << std::endl;
 	std::string line2;
-	std::vector<std::string>vecScore;
+	std::vector<std::string>vecScore(6, "---");
 	std::ifstream file3("scoretxtFile.txt");
-		if(file3.is_open())
+		if(file3.is_open() && file3.peek() != file3.eof())
 		{
-			while(getline(file3, line2))
+			for(int i = 0; i < vecScore.size(); ++i)
 			{
-				vecScore.push_back(line2);
+				if (getline(file3, line2) || !file3.eof())
+					vecScore.at(i) = line2;
+			std::cout << 2 << std::endl;
 			}
 		file3.close();
 		}
+			std::cout << 3 << std::endl;
 
 	return vecScore;
 
@@ -60,15 +64,16 @@ std::vector<std::string> Part3_window::initials_read()
 
 	std::string line;
 
-	std::vector<std::string>vecInit;
+	std::vector<std::string>vecInit{6, "---"};
 
 	std::ifstream file1("initials.txt");
 	 if (file1.is_open())
 	 {
 		// while (getline(file1, line))
-		while(getline(file1, line))
+			for(int i = 0; i < vecInit.size(); ++i)
 		 {
-			 vecInit.push_back(line);
+			if (getline(file1, line) || !file1.eof())
+				 vecInit.at(i) = line;
 			 
 		 }
 		 file1.close();
