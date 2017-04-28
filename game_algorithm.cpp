@@ -80,9 +80,7 @@ void white_callback(Fl_Widget*, void*) {
 // callback funtion that allows only allows the user only 5 seconds to make a button choice once the timer button has been clicked
 void time(Fl_Widget*, void*) {
 	
-	
 	if (time_right.label() != label) {time_right.label(label);}
-
 	time_right.deactivate();
 	//value is set to one to distinguish what invoked timer callback
 	time_right.value(1);
