@@ -39,6 +39,7 @@ void Part3_window::init_scores()
 }
 std::vector<std::string> Part3_window::score_read()
 {
+	//read from score file
 	std::string line2;
 	std::vector<std::string>vecScore(6, "---");
 	std::ifstream file3(score_file);
@@ -54,33 +55,27 @@ std::vector<std::string> Part3_window::score_read()
 		file3.close();
 		}
 
-	//for (int i = 0; i < vecScore.size(); ++i) { std::cout << "vecScore in enter callback: " << vecScore[i] << std::endl; }
 	return vecScore;
 
 }
 
 std::vector<std::string> Part3_window::initials_read()
 {
-
+	//reads from the initial file and initializes vecinit to '---'
 	std::string line;
-
 	std::vector<std::string>vecInit{6, "---"};
 
 	std::ifstream file1(initial_file);
-	 if (file1.is_open())
-	 {
-		// while (getline(file1, line))
+		
+	if (file1.is_open())
+	{
 			for(int i = 0; i < vecInit.size(); ++i)
 		 {
 			if (getline(file1, line))
-			{
 				 vecInit.at(i) = line;
-			}
-			 
 		 }
-		 file1.close();
-	 }
-	//for (int i = 0; i < vecInit.size(); ++i) { std::cout << "vecInit in enter callback: " << vecInit[i] << std::endl; }
+	 file1.close();
+	}
 	return vecInit;
 
 }
@@ -96,17 +91,18 @@ const char* Part3_window::results(int index, std::vector<std::string> initials, 
 	else if (index > score.size() - 1) ss << index + 1 << ". " << initials[index] << "\t\t" << "---"; 
 	else ss << index + 1 << ". " << initials[index] << "\t\t" << score[index];   
 
+	//convert to const char
 	std::string temp = ss.str();
 	const char* cstr = temp.c_str();
 	std::cout << "results: " << cstr << std::endl;
 	return cstr;
-
 }
 
 void Part3_window::set_inbox_error() { inbox.value("Enter valid initials!"); }
 
 std::string Part3_window::file_write()
 {
+	//takes value from inbox
 	std::string newInput = inbox.value();
 
 	if (newInput.size() > 3 || newInput.empty())
@@ -114,10 +110,12 @@ std::string Part3_window::file_write()
 		set_inbox_error();
 		return "error";
 	}
-	enter_button.deactivate();
 
+	enter_button.deactivate();
+	//set flag
 	valid_initials_entered = true;
 
+	//write initial to file
 	std::ofstream file2(initial_file, std::ios::app);
 	file2 << newInput << '\n';
 	file2.close();
@@ -127,15 +125,13 @@ std::string Part3_window::file_write()
 
 void Part3_window::startgame_callback(Fl_Widget*, void*v)
 {
+//void cast to Part3_window
 Part3_window * p3  = ((Part3_window *)v);
-
 update_score(0,0);
 
+//if valid initials were entered
 if (!(p3->valid_initials_entered))
-{
-	p3->set_inbox_error();
-	return;
-}
+{ p3->set_inbox_error(); return; }
 
 	p3->hide();
 	win.show();
@@ -143,6 +139,7 @@ if (!(p3->valid_initials_entered))
 
 void Part3_window::change_label(std::vector<std::string> vecScore, std::vector<std::string> vecInit)
 {
+	//sets all the labels
 	score1_txt.copy_label(results(0, vecInit, vecScore));
 	score2_txt.copy_label(results(1, vecInit, vecScore));
 	score3_txt.copy_label(results(2, vecInit, vecScore));
@@ -151,6 +148,7 @@ void Part3_window::change_label(std::vector<std::string> vecScore, std::vector<s
 	score6_txt.copy_label(results(5, vecInit, vecScore));
 
 }
+
 void Part3_window::enter_callback(Fl_Widget*, void* v)
 {
 
@@ -159,6 +157,7 @@ void Part3_window::enter_callback(Fl_Widget*, void* v)
 	//newinput is for input checking
 	std::string newInput = p3->file_write();
 	if (newInput == "error") return;
+	//reads from the files
 	std::vector<std::string> vecScore = p3->score_read();
 	std::vector<std::string> vecInit = p3->initials_read();
 	p3->change_label(vecScore, vecInit);
