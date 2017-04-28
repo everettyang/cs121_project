@@ -29,7 +29,8 @@ Fl_Box score(820,200,100,100,"Points: 0");
 Fl_Box comp_right(800,50,100,100,"Percent computer correct:\n\t0%");
 Fl_Button continue_game(100,100, 100,100, "Play again?");
 
-//---------------------------------------- callbacks-----------------------
+//---------------------------------------- callbacks----------------------
+//animates the splash screen with an image of naruto running in the background
 void backImage(){
 	animation.image(image);
 	animation1.image(image1);
@@ -41,7 +42,7 @@ void backImage(){
 	
 }
 
-
+// callback function that allows the user to pick a choice once the blue button has been pressed
 void blue_callback(Fl_Widget* , void *) {
 
 	Fl::add_timeout(0.0, button_time);	
@@ -53,6 +54,7 @@ void blue_callback(Fl_Widget* , void *) {
 	}
 }
 
+// callback function that allows the user to pick a choice once the red button has been pressed
 void red_callback(Fl_Widget* , void*) {
 
 	Fl::add_timeout(0.0, button_time);	
@@ -64,6 +66,7 @@ void red_callback(Fl_Widget* , void*) {
 	}
 }
 
+// callback function that allows the user to pick a choice once the white button has been pressed
 void white_callback(Fl_Widget*, void*) {
 
 	Fl::add_timeout(0.0, button_time);	
@@ -74,21 +77,19 @@ void white_callback(Fl_Widget*, void*) {
 		if (choices[i][1] == 3) { choices[i][0] += 1; }
 	}
 }
-
+// callback funtion that allows only allows the user only 5 seconds to make a button choice once the timer button has been clicked
 void time(Fl_Widget*, void*) {
 	
 	
 	if (time_right.label() != label) {time_right.label(label);}
 
-	//std::cout<<int{time_right.value()}<<std::endl
-	
 	time_right.deactivate();
 	//value is set to one to distinguish what invoked timer callback
 	time_right.value(1);
 	Fl::add_timeout(0.0, timer);	
 	
 }
-
+//  button to call the timer callback and reactivates the red, white, and blue buttons for the user to choose.
 void button_time(void*)
 {
 	red.deactivate(); white.deactivate(); blue.deactivate();
@@ -97,7 +98,7 @@ void button_time(void*)
 
 	Fl::remove_timeout(timer);
 }	
-
+// the timer function that counts down from 5 seconds until the user clicks on one of the choices or runs out of time.
 void timer(void*) {
 	  static int time = 5;
 	  if (time_right.value() == 1) { time = 5; time_right.value(0); }
@@ -113,9 +114,9 @@ void timer(void*) {
 
 		time_left.label("Time's up! No points! Next move?");
 
-		red.deactivate(); white.deactivate(); blue.deactivate();
+		red.deactivate(); white.deactivate(); blue.deactivate();  //reactivate the buttons 
 
-		time_right.activate();
+		time_right.activate();                                    // calls the timer function
 		NUM_ROUNDS = NUM_ROUNDS - 1;
 		game_over();
 		num_rounds();
@@ -127,20 +128,16 @@ void timer(void*) {
 		Fl::repeat_timeout(1.0 , timer);
       } 
 }
-
+// once the number of rounds has reached 0 this callback function takes the player to the final score screen
 void continue_button(Fl_Widget*, void*) {
 		score_to_file();
 		win.hide();
 		std::cout << 1 << std::endl;
-		//static Part6_window * finalscore = new Part6_window (width,height,"Score");
 		finalscore.show();
 		finalscore.init_scores();
-			
-		//finalscore->show();
-	
 }
 //---------------------------------------- game logic-----------------------
-
+// this updates the timer box label to show the user the amount of time they have left
 void show_countdown(int time)
 {
 	std::stringstream tt;
@@ -149,7 +146,7 @@ void show_countdown(int time)
 	const char* cstr = temp.c_str();
 	time_left.copy_label(cstr);
 }
-
+// this updates the score to show player the number of points they have won and the percentage the computer has guessed correct
 void update_score(double points, double percent_correct)
 {
 	//use stringstream to format scoreboard
@@ -168,7 +165,7 @@ void update_score(double points, double percent_correct)
 	ss.str(std::string());
 	ss.clear();
 }
-
+// this prints out the number of rounds are left in the game.
 void num_rounds()
 {
 	std::stringstream ss;
@@ -177,15 +174,15 @@ void num_rounds()
 	const char* cstr = temp.c_str();
 	rounds.copy_label(cstr);
 }
-
+// this prints out to the screen whether the computer guessed right and calls update_score to show the number of points the player has and how many times the computer guesses correctly.
 void show_result()
 {
 	NUM_ROUNDS -= 1;
 	num_rounds();
 	static double comp_correct;
 	static double comp_correct_per;
-	double total_choices = choices[0][0] + choices[1][0] + choices[2][0];
-	int prediction = ai_predict(total_choices);
+	double total_choices = choices[0][0] + choices[1][0] + choices[2][0];   //gives the number of choices the user has made so far.
+	int prediction = ai_predict(total_choices);                             // calls the ai_predict function to check how many times the computer has made correct guesses
 	std::cout << "Prediction: " << prediction << '\n' << std::endl;
 	if (choices[3][0] == prediction)
 	{
@@ -202,7 +199,7 @@ void show_result()
 	update_score(points, comp_correct_per);
 	game_over();
 }
-
+//writes the player's final score to the score file.
 void score_to_file()
 {
 
@@ -212,7 +209,7 @@ void score_to_file()
 	file2.close();
 		
 }
-
+// once the number of rounds is over, all the buttons are deactivated and the continue_game button is activated to take the player to the final score screen
 void game_over()
 {
 	//finish the game if num rounds is 0 
@@ -226,7 +223,7 @@ void game_over()
 		continue_game.activate();
 	}
 }
-
+// by taking a random number the ai_prediction function makes a "random" guess of the user's choice. If the user chooses one choice more often the function will use
 int ai_predict(double total_choices)
 {			
 	srand(time(NULL));
@@ -235,7 +232,8 @@ int ai_predict(double total_choices)
 
 	//sorting algorithm
 	std::sort(choices.begin(), choices.end() - 1, [](const std::vector<int>& a, const std::vector<int>& b) { return a[0] < b[0]; });
-
+    
+	// calculates the percentage of the number of times the player has picked a value
 	if (total_choices == 0)
 	{
 		p1 = (1/3.0); p2 = (1/3.0); p3 = (1/3.0);
@@ -247,9 +245,7 @@ int ai_predict(double total_choices)
 		p3 = choices[2][0]/total_choices;	
 	}
 
-	std::cout << "Prediction value: " << val << std::endl;
-	std::cout << "p1 p2 p3: " << p1 << ' ' <<  p2 << ' ' << p3 << std::endl;
-	
+	// this returns the game's prediction of the player's choice
 	if (val < p1)
 		return choices[0][1];
 	else if (val < p1 + p2)
@@ -257,24 +253,3 @@ int ai_predict(double total_choices)
 	else 
 		return choices[2][1];
 }
-
-
-//--------------------------------TestMain-------------------------------------------
-//
-//int main()
-//{
-//	blue.callback(blue_callback);
-//	red.callback(red_callback);
-//        white.callback(white_callback);
-//
-//	num_rounds();
-//
-//	red.deactivate();
-//	white.deactivate();
-//	blue.deactivate();
-//
-//	time_right.callback(time);
-//	box.box(FL_UP_BOX);
-//	win.show();
-//	return Fl::run();
-//}
