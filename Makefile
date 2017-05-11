@@ -1,3 +1,4 @@
+#Makefile for building the guessing game
 CC = 'g++'
 FLAGS= -c -std=c++17
 LINKFLAGS = `fltk-config --ldflags --use-images`

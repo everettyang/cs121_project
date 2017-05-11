@@ -1,3 +1,4 @@
+//main
 #include "splash_screen.h" 
 int main()
 {
